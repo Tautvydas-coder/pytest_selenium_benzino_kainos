@@ -7,12 +7,11 @@ GMAIL_NAME = "work.selenium@gmail.com"
 GMAIL_PASSWORD = "Selenium1]"
 
 # Drivers
-CHROME_DRIVER_PATH = "drivers/chromedriver.exe"
-FFOX_DRIVER_PATH = "drivers/geckodriver.exe"
-
+CHROME_DRIVER_PATH = "chromedriver"
+FFOX_DRIVER_PATH = "geckodriver"
 
 # Buttons
-FIND_BUTTON = "//input[@value='Ieškoti']"
+FIND_BUTTON = '//*[@id="filtering"]/div/div[1]/div/table/tbody/tr[2]/td[5]/input'
 GMAIL_SEND_BUTTON = "//div[@aria-label='Siųsti ‪(Ctrl –Enter)‬']"
 LOGIN_PASSWORD_BUTTON_NEXT = '//*[@id="passwordNext"]'
 CREATE_LETTER_BUTTON = "/html/body/div[7]/div[3]/div/div[2]/div[1]/div[1]/div/div"
