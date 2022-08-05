@@ -13,7 +13,7 @@ from resources.variables import CHROME_DRIVER_PATH, FFOX_DRIVER_PATH
 
 
 # TODO prisukti PyTest
-
+# six because six tests
 
 @pytest.mark.six
 def test_open_website():
@@ -72,12 +72,13 @@ def test_goto_gmail_web():
     assert gmail_title == "Gmail"
 
 
-# # @pytest.fixture(params=)
-# def test_input_login_name(login_name: str):
-#     WebDriverWait(driver, 15).until(
-#         EC.presence_of_element_located((By.XPATH, BOX_LOGIN_NAME))
-#     ).send_keys(login_name)
-#     driver.find_element(By.XPATH, LOGIN_NAME_BUTTON_NEXT).click()
+@pytest.mark.six
+def test_input_login_name(login_name: str):
+    WebDriverWait(driver, 15).until(
+        EC.presence_of_element_located((By.XPATH, BOX_LOGIN_NAME))
+    ).send_keys(login_name)
+    driver.find_element(By.XPATH, LOGIN_NAME_BUTTON_NEXT).click()
+
 
 
 # def test_input_login_password(login_password: str):
