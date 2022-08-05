@@ -2,8 +2,8 @@ from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-import mail_credentials
-from webdriver_service import driver_service
+from resources import mail_credentials
+from services.webdriver_service import driver_service
 from selenium.webdriver.support.select import Select
 
 # TODO prisukti pytest
