@@ -5,32 +5,32 @@ from selenium.webdriver.support.wait import WebDriverWait
 from resources import mail_credentials
 from services.webdriver_service import driver_service
 from selenium.webdriver.support.select import Select
+from resources.variables import *
 
 # TODO prisukti pytest
 
 driver = driver_service()
 # driver.get('chrome://settings/clearBrowserData')
-City = 'Vilnius'
 
 
 def open_website():
     driver.implicitly_wait(5)
-    driver.get("http://www.degalukainos.lt/")
+    driver.get(GAS_PRICE_URL)
 
 
 def choose_city():
     select_element = driver.find_element(By.ID, 'city')
     select_object = Select(select_element)
-    select_object.select_by_visible_text(City)
+    select_object.select_by_visible_text(CITY)
 
 
 def press_button():
-    driver.find_element(By.XPATH, "//input[@value='Ieškoti']").click()
+    driver.find_element(By.XPATH, FIND_BUTTON).click()
 
 
 def fetch_address_and_price():
     main = WebDriverWait(driver, 15).until(
-        EC.presence_of_element_located((By.XPATH, '//*[@id="kainos"]/tbody'))
+        EC.presence_of_element_located((By.XPATH, PRICE_TABLE))
     )
     rows_table = main.find_elements(By.TAG_NAME, "tr")
     list_of_address_prices = []
@@ -48,38 +48,35 @@ def open_new_tab():
 
 
 def goto_gmail_web():
-    driver.get(
-        'https://accounts.google.com/ServiceLogin/identifier?service=mail&passive=1209600&osid=1&continue=https%3A%2F'
-        '%2Fmail.google.com%2Fmail%2Fu%2F0%2F&followup=https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F&emr=1&flowName'
-        '=GlifWebSignIn&flowEntry=ServiceLogin')
+    driver.get(GMAIL_LOGIN_URL)
 
 
 def input_login_name(login_name: str):
     WebDriverWait(driver, 15).until(
-        EC.presence_of_element_located((By.XPATH, '//*[@id="identifierId"]'))
+        EC.presence_of_element_located((By.XPATH, BOX_LOGIN_NAME))
     ).send_keys(login_name)
-    driver.find_element(By.XPATH, "//div[@id='identifierNext']/div/button/span").click()
+    driver.find_element(By.XPATH, LOGIN_NAME_BUTTON_NEXT).click()
 
 
 def input_login_password(login_password: str):
     WebDriverWait(driver, 15).until(
         EC.element_to_be_clickable(
-            (By.XPATH, '//*[@id="password"]/div[1]/div/div[1]/input'))
+            (By.XPATH, BOX_LOGIN_PASSWORD))
     ).send_keys(login_password)
-    driver.find_element(By.XPATH, '//*[@id="passwordNext"]').click()
+    driver.find_element(By.XPATH, LOGIN_PASSWORD_BUTTON_NEXT).click()
 
 
 def create_letter():
     WebDriverWait(driver, 15).until(
         EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[7]/div[3]/div/div[2]/div[1]/div[1]/div/div'))
+            (By.XPATH, CREATE_LETTER_BUTTON))
     ).click()
 
 
 def input_sender_email(sender_mail: str):
     sender_address = WebDriverWait(driver, 15).until(
         EC.element_to_be_clickable(
-            (By.CLASS_NAME, 'eV'))
+            (By.CLASS_NAME, EMAIL_TO_SEND_BOX))
     )
     ActionChains(driver).click(sender_address).send_keys(sender_mail).perform()
     ActionChains(driver).click(sender_address).send_keys(Keys.ENTER).perform()
@@ -88,7 +85,7 @@ def input_sender_email(sender_mail: str):
 def input_letter(address_and_price: str):
     mail_content = WebDriverWait(driver, 15).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR,
-                                    "div[aria-label='Pranešimo turinys']"))
+                                    EMAIL_TEXT_FIELD))
     )
     ActionChains(driver).move_to_element(mail_content).click(mail_content).send_keys(address_and_price).perform()
 
@@ -96,7 +93,7 @@ def input_letter(address_and_price: str):
 def send_email():
     button = WebDriverWait(driver, 15).until(
         EC.element_to_be_clickable((By.XPATH,
-                                    "//div[@aria-label='Siųsti ‪(Ctrl –Enter)‬']"))
+                                    GMAIL_SEND_BUTTON))
     )
     ActionChains(driver).move_to_element(button).click().perform()
 

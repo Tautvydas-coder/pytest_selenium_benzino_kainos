@@ -1,5 +1,4 @@
-GMAIL_NAME = "work.selenium@gmail.com"
-GMAIL_PASSWORD = "Selenium1]"
+from resources.variables import GMAIL_NAME, GMAIL_PASSWORD
 
 
 def email_name():

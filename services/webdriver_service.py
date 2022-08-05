@@ -1,9 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.firefox.service import Service as FoxService
-
-CHROME_DRIVER_PATH = "../drivers/chromedriver.exe"
-FFOX_DRIVER_PATH = "../drivers/geckodriver.exe"
+from resources.variables import CHROME_DRIVER_PATH, FFOX_DRIVER_PATH
 
 
 def driver_service():
