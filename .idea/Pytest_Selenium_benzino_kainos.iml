@@ -5,4 +5,13 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PyNamespacePackagesService">
+    <option name="namespacePackageFolders">
+      <list>
+        <option value="$MODULE_DIR$/PyTest" />
+        <option value="$MODULE_DIR$/resources" />
+        <option value="$MODULE_DIR$/drivers" />
+      </list>
+    </option>
+  </component>
 </module>
